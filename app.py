@@ -77,6 +77,8 @@ async def process_upload(
     use_llm: bool = Form(False),
 ):
     _prune_jobs()
+    if use_llm and (not os.getenv("LLM_API_KEY") or not os.getenv("LLM_BASE_URL")):
+        raise HTTPException(400, "大模型辅助分类未配置：请在本机 .env 中填写服务地址和密钥，或取消勾选")
     if len(files) > MAX_FILES:
         raise HTTPException(413, f"最多上传 {MAX_FILES} 个文件")
     job = tempfile.TemporaryDirectory(prefix="tax-project-")
