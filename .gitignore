@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+tests/__pycache__/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pdf
+*.zip
+*.xlsx
+*.xls
+*.log
+outputs/
+result/

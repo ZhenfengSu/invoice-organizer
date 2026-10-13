@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>发票整理台</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="masthead"><span class="brand-mark">票</span><span class="brand-name">发票整理台</span><span class="brand-aside">LOCAL INVOICE DESK</span></header>
+    <main>
+      <section class="hero">
+        <div class="hero-copy"><p class="eyebrow">批量识别 / 核验 / 归档</p><h1>把一整个文件夹，<br><em>整理得明明白白。</em></h1><p class="intro">上传 PDF 文件夹或 ZIP，自动分出国内发票、海外收据与异常票据，生成逐项 Excel 和完整压缩包。</p></div>
+        <div class="hero-stamp" aria-hidden="true"><span>INVOICE</span><strong>01—05</strong><small>SCAN · CHECK · SORT</small></div>
+      </section>
+      <section class="workspace">
+        <div class="section-heading"><span class="section-no">01</span><div><h2>导入票据</h2><p>文件夹会递归处理其中的 PDF；也支持直接选择多个 PDF 或 ZIP。</p></div></div>
+        <div class="upload-grid">
+          <label class="dropzone" id="dropzone" for="folder"><span class="upload-icon">↑</span><strong>选择整个文件夹</strong><span>或将 PDF / ZIP 拖到这里</span><input id="folder" type="file" webkitdirectory multiple hidden></label>
+          <div class="upload-side"><label class="secondary-upload" for="files">选择 PDF 或 ZIP 文件 <span>↗</span><input id="files" type="file" accept=".pdf,.zip,application/pdf,application/zip" multiple hidden></label><div class="selected" id="selected">尚未选择文件</div><p class="micro">本地运行 · 单份 PDF 最多 30 MB · 最多 1000 份</p></div>
+        </div>
+      </section>
+      <section class="workspace settings">
+        <div class="section-heading"><span class="section-no">02</span><div><h2>校验购买方</h2><p>按样本预填。多个主体按行填写名称与对应税号；留空则只检查能否识别及税号校验位。</p></div></div>
+        <div class="field-grid"><label>正确的购买方名称<textarea id="buyer-names" rows="2" placeholder="请输入购买方名称"></textarea></label><label>正确的统一社会信用代码 / 纳税人识别号<textarea id="tax-ids" rows="2" placeholder="请输入对应税号"></textarea></label></div>
+        <label class="toggle"><input id="use-llm" type="checkbox"><span class="toggle-track"></span><span>模糊票据启用大模型辅助分类</span></label><p class="micro">仅在规则无法确定分类时调用；需在本机配置服务地址和密钥。启用后票据文本会发送至所配置的服务；金额与税号仍由代码提取和校验。</p>
+      </section>
+      <section class="action-row"><button id="run" type="button">开始整理 <span>↗</span></button><span id="status" role="status">等待上传</span></section>
+      <section class="results" id="results" hidden><div class="section-heading"><span class="section-no">03</span><div><h2>整理完成</h2><p>异常票据已从金额汇总中排除，请查看压缩包内的错误报告。</p></div></div><div class="stat-grid" id="stats"></div><div class="error-list" id="errors"></div><a id="download" class="download" href="#">下载分类压缩包 <span>↓</span></a></section>
+    </main>
+    <footer>PDF TEXT / OCR / VALIDATION / EXCEL <span>全部在本机处理 · 启用大模型时除外</span></footer>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
